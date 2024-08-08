@@ -7,7 +7,7 @@ const initialState = {
 	dishes: [],
 	typesList: [],
 	/* base_api: "http://127.0.0.1:8000/", */
-	base_api: "https://deliveboo-back-office.carloadile.com",
+	base_api: "https://deliveboo-back-office.carloadile.com/",
 	restaurants_api: "api/restaurants",
 	items: [],
 	order_resume: [],
