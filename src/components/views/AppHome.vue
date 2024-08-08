@@ -206,7 +206,7 @@ input[type="text"] {
 	height: 650px;
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-image: url("src/assets/img/jumbo-food-2.jpg");
+	background-image: url("/src/assets/img/jumbo-food-2.jpg");
 
 	@media(max-width: 767px) {
 		height: 425px;
