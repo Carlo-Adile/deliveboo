@@ -6,7 +6,8 @@ const initialState = {
 	types: [],
 	dishes: [],
 	typesList: [],
-	base_api: "http://127.0.0.1:8000/",
+	/* base_api: "http://127.0.0.1:8000/", */
+	base_api: "https://deliveboo-back-office.carloadile.com",
 	restaurants_api: "api/restaurants",
 	items: [],
 	order_resume: [],
@@ -17,20 +18,34 @@ const initialState = {
 
 export const state = reactive(initialState);
 
-/* carica local storage all'avvio */
-const loadFromLocalStorage = () => {
-	const storedItems = JSON.parse(localStorage.getItem("items"));
-	state.items = storedItems ? storedItems : [];
 
-	const storedCartRestaurantName = localStorage.getItem("cartRestaurantName");
-	state.cartRestaurantName = storedCartRestaurantName ? storedCartRestaurantName : '';
-};
 
 /* salva item in local storage */
 const saveToLocalStorage = () => {
 	localStorage.setItem("items", JSON.stringify(state.items));
 	localStorage.setItem("cartRestaurantName", state.cartRestaurantName);
 };
+
+
+/* carica local storage all'avvio */
+const loadFromLocalStorage = () => {
+
+	/* crea o ritorna istanza di getItem("oggetto desiderato json-ificato") */
+	const storedItems = JSON.parse(localStorage.getItem("items"));
+
+	state.items = storedItems ? storedItems : [];
+	console.log("hai caricato carrello: ", storedItems);
+
+	const storedCartRestaurantName = localStorage.getItem("cartRestaurantName");
+	state.cartRestaurantName = storedCartRestaurantName ? storedCartRestaurantName : '';
+
+	console.log("state prende i dati del carrello: ", state.items);
+};
+
+const loadName = () => {
+	state.cartRestraurantName = localStorage.getItem("cartRestaurantName");
+}
+
 
 /* calcola il totale del carrello */
 state.calculateTotal = function () {
@@ -64,7 +79,7 @@ state.callApi = function () {
 			saveToLocalStorage();
 			this.loading = false;
 
-			/* console.log("types caricati:", this.types); */
+			console.log("types caricati:", this.types);
 		})
 		.catch(err => {
 			console.log(err);
@@ -73,3 +88,6 @@ state.callApi = function () {
 
 /* carica local storage all'avvio */
 loadFromLocalStorage();
+
+loadName();
+

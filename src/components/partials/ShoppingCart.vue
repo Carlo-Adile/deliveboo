@@ -28,6 +28,7 @@ export default {
 		increaseQuantity(item) {
 			item.quantity++;
 			this.saveToLocalStorage();
+			state.loadName();
 		},
 		decreaseQuantity(item) {
 			if (item.quantity > 1) {
@@ -45,6 +46,9 @@ export default {
 			state.toggle_cart = !state.toggle_cart;
 			console.log("stato modale: ", state.toggle_cart);
 		}
+	},
+	mounted() {
+
 	}
 };
 </script>
@@ -64,7 +68,7 @@ export default {
 
 				<div class="col-12">
 					<strong v-if="localStorageCartRestaurantName">
-						Stai ordinando da: {{ state.cartRestraurantName }}
+						Stai ordinando da: {{ localStorageCartRestaurantName }}
 					</strong>
 
 					<table class="table">
