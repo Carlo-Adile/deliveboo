@@ -77,7 +77,7 @@ export default {
 
 					/* axios post */
 					if (this.isValid === true) {
-						axios.post('http://127.0.0.1:8000/api/orders/make/payment', this.form)
+						axios.post(state.base_api + 'api/orders/make/payment', this.form)
 							.then((response) => {
 								state.order_resume = state.items
 								this.clearCart();
