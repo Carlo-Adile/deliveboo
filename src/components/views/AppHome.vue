@@ -130,7 +130,7 @@ export default {
 							<div class="px-2 d-flex align-items-center flex-grow-1" id="search_bar">
 								<i class="fa-solid fa-magnifying-glass fs-5 ps-2 text-secondary"></i>
 								<input type="text" autocomplete="off" name="types.name" id="types.name" placeholder=" Cerca Categoria"
-									class="border-0 py-3 px-2 flex-grow-1" v-model="searchQuery" @keydown.enter.prevent="handleConfirm">
+									class="border-0 py-3 px-1 flex-grow-1" v-model="searchQuery" @keydown.enter.prevent="handleConfirm">
 							</div>
 							<button type="submit" class="rounded-pill fw-bold border-0 px-3 px-lg-4" @click="handleConfirm">
 								conferma
@@ -227,7 +227,7 @@ input[type="text"] {
 
 		#search_card {
 			.card {
-				min-width: 360px;
+				min-width: 365px;
 			}
 		}
 	}
