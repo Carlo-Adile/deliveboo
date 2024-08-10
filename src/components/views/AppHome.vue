@@ -2,7 +2,7 @@
 import axios from 'axios';
 import RestaurantCard from '../partials/RestaurantCard.vue';
 import { state } from '../../state';
-
+import Fuse from 'fuse.js';
 
 export default {
 	name: "AppHome",
@@ -16,7 +16,8 @@ export default {
 			restaurants: [],
 			types: [],
 			typesList: [],
-			searchQuery: ''
+			searchQuery: '',
+			fuse: null
 		}
 	},
 	methods: {
@@ -38,7 +39,6 @@ export default {
 					});
 			} else {
 				this.resetFilters();
-				/* console.log("nessun filtro selezionato!"); */
 			}
 		},
 		resetFilters() {
@@ -46,10 +46,18 @@ export default {
 			state.callApi();
 		},
 		/* search bar */
+		/* conferma se la query trova corrispondenza o passa il primo risultato proposto */
+		setupFuse() {
+			this.fuse = new Fuse(this.types, {
+				keys: ['name'],
+				includeScore: true,
+				threshold: 0.4
+			});
+		},
 		addType(type) {
 			const typeName = this.searchQuery.trim().toLowerCase();
 			if (!type) {
-				type = state.types.find(t => t.name.toLowerCase() === typeName);
+				type = this.filteredTypes[0];
 			}
 			if (type && !this.typesList.includes(type.id)) {
 				this.typesList.push(type.id);
@@ -58,33 +66,37 @@ export default {
 			}
 		},
 		handleConfirm() {
-			/* conferma tramite pulsante se search query corrispone ad un type esistente */
-			this.addType();
+			const query = this.searchQuery.trim().toLowerCase();
+			if (query) {
+				const results = this.fuse.search(query);
+				if (results.length > 0) {
+					this.addType(results[0].item);
+				}
+			}
 		},
 		goTo(pageNumber) {
 			axios
-				.get(state.base_api + state.restaurants_api + `?page=${pageNumber}`) //ricordati che con  i backtick puoi utilizzare stringhe e variabili insieme con l'utilizzo del ${}
-
+				.get(state.base_api + state.restaurants_api + `?page=${pageNumber}`)
 				.then((response) => {
-					//quando ottengo response, svolgo la funzione
 					console.log(response.data);
-					state.restaurants = response.data.restaurants; //salvo nell'array dichiarato in data, il risultato ottenuto dalla chiamata ajax
-					//console.log( this.projectList);
+					state.restaurants = response.data.restaurants;
 				})
 				.catch((error) => {
 					console.error("Errore durante la chiamata API:", error);
-				}); //aggiungo la catach per la gestione degli errori
+				});
 		},
-
 	},
 	mounted() {
 		state.callApi();
+		this.types = state.types;
+		this.setupFuse();
 	},
 	computed: {
 		filteredTypes() {
 			const query = this.searchQuery.trim().toLowerCase();
-			if (query) {
-				return state.types.filter(type => type.name.toLowerCase().includes(query));
+			if (query && this.fuse) {
+				const results = this.fuse.search(query);
+				return results.map(result => result.item);
 			}
 			return [];
 		}
@@ -93,7 +105,6 @@ export default {
 </script>
 
 <template>
-
 	<!-- jumbotron with search bar -->
 	<section id="my_jumbotron" loading="eager">
 		<div class="container-fluid text-center h-100 py-5">

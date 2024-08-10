@@ -31,12 +31,12 @@ const loadFromLocalStorage = () => {
 	const storedItems = JSON.parse(localStorage.getItem("items"));
 
 	state.items = storedItems ? storedItems : [];
-	console.log("hai caricato carrello: ", storedItems);
+	console.log("carrello ricaricato: ", storedItems);
 
 	const storedCartRestaurantName = localStorage.getItem("cartRestaurantName");
 	state.cartRestaurantName = storedCartRestaurantName ? storedCartRestaurantName : '';
 
-	console.log("state prende i dati del carrello: ", state.items);
+	/* console.log("state prende i dati del carrello: ", state.items); */
 };
 
 const loadName = () => {
@@ -67,15 +67,13 @@ state.callApi = function () {
 	axios
 		.get(this.base_api + this.restaurants_api)
 		.then(response => {
-			console.log(response);
 			this.restaurants = response.data.restaurants;
 			this.types = response.data.types;
 			this.dishes = response.data.dishes;
 			this.typesList = response.data.typesList;
 			saveToLocalStorage();
 			this.loading = false;
-
-			console.log("types caricati:", this.types);
+			/* console.log("types caricati:", this.types); */
 		})
 		.catch(err => {
 			console.log(err);
