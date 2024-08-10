@@ -18,6 +18,24 @@ const initialState = {
 
 export const state = reactive(initialState);
 
+/* axios call all'api */
+state.callApi = function () {
+	axios
+		.get(this.base_api + this.restaurants_api)
+		.then(response => {
+			this.restaurants = response.data.restaurants;
+			this.types = response.data.types;
+			this.dishes = response.data.dishes;
+			this.typesList = response.data.typesList;
+			saveToLocalStorage();
+			this.loading = false;
+			/* console.log("types caricati:", this.types); */
+		})
+		.catch(err => {
+			console.log(err);
+		});
+};
+
 /* salva item in local storage */
 const saveToLocalStorage = () => {
 	localStorage.setItem("items", JSON.stringify(state.items));
@@ -60,24 +78,6 @@ state.dishesTotal = function () {
 		dishTotal += item.quantity;
 	}
 	return dishTotal;
-};
-
-/* axios call all'api */
-state.callApi = function () {
-	axios
-		.get(this.base_api + this.restaurants_api)
-		.then(response => {
-			this.restaurants = response.data.restaurants;
-			this.types = response.data.types;
-			this.dishes = response.data.dishes;
-			this.typesList = response.data.typesList;
-			saveToLocalStorage();
-			this.loading = false;
-			/* console.log("types caricati:", this.types); */
-		})
-		.catch(err => {
-			console.log(err);
-		});
 };
 
 /* carica local storage all'avvio */

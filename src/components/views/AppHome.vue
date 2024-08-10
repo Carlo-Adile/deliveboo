@@ -51,8 +51,9 @@ export default {
 			this.fuse = new Fuse(this.types, {
 				keys: ['name'],
 				includeScore: true,
-				threshold: 0.4
+				threshold: 0.4,
 			});
+			console.log("Fuse.js configurato con i tipi:", this.types);
 		},
 		addType(type) {
 			const typeName = this.searchQuery.trim().toLowerCase();
@@ -89,7 +90,6 @@ export default {
 	mounted() {
 		state.callApi();
 		this.types = state.types;
-		this.setupFuse();
 	},
 	computed: {
 		filteredTypes() {
@@ -99,6 +99,15 @@ export default {
 				return results.map(result => result.item);
 			}
 			return [];
+		}
+	},
+	watch: {
+		/* aspetta state.types */
+		'state.types'(newTypes) {
+			if (Array.isArray(newTypes) && newTypes.length > 0) {
+				this.types = newTypes;
+				this.setupFuse();
+			}
 		}
 	}
 } 
