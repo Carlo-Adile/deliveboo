@@ -182,7 +182,6 @@ export default {
 						<ul class="pagination pagination-lg">
 							<li class="page-item pagination_navigation_button" v-for="pageNumber in state.restaurants.last_page"
 								@click="goTo(pageNumber)">
-								<!--ricordati che non puoi mettere direttamente i tuoi elementi in un array, perchè altrimenti non puoi accedere alle altre proprietà .)-->
 								<a class="page-link">{{ pageNumber }}</a>
 							</li>
 						</ul>
