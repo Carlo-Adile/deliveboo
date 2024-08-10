@@ -1,6 +1,7 @@
     <script>
     import Payment from '../partials/Payment.vue';
     import axios from 'axios';
+    import { state } from '../../state';
 
     export default {
         data() {
@@ -13,7 +14,7 @@
         },
         methods: {
             getInitialToken() {
-                axios.get('http://127.0.0.1:8000/api/orders/generate').then((response) => {
+                axios.get(state.base_api + 'api/orders/generate').then((response) => {
                     // console.log(response.data.token);
                     this.initialToken = response.data.token
                     /* if (this.initialToken !== '') {
