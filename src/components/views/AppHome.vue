@@ -227,7 +227,7 @@ input[type="text"] {
 
 		#search_card {
 			.card {
-				min-width: 365px;
+				min-width: 370px;
 			}
 		}
 	}
