@@ -74,7 +74,6 @@ export default {
 					this.form.restaurantId = uniqueRestaurantId;
 					console.log('Payment Method Nonce + this.form:', payload.nonce, this.form);
 
-
 					/* axios post */
 					if (this.isValid === true) {
 						axios.post(state.base_api + 'api/orders/make/payment', this.form)
@@ -128,7 +127,6 @@ export default {
 					element.classList.add('is-valid');
 				}
 			});
-
 
 			if (allInputsInserted) {
 				if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.form.customerEmail)) {
@@ -199,8 +197,8 @@ export default {
 					</div>
 					<div class="mb-2">
 						<label for="customerPhoneNumber" class="form-label">Cellulare*</label>
-						<input id="customerPhoneNumber" class="d-block w-100" type="tel"
-							v-model="form.customerPhoneNumber" placeholder="1234567890" />
+						<input id="customerPhoneNumber" class="d-block w-100" type="tel" v-model="form.customerPhoneNumber"
+							placeholder="1234567890" />
 					</div>
 					<div class="mb-2">
 						<label for="customerAddress" class="form-label">Indirizzo*</label>

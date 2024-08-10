@@ -100,7 +100,6 @@ export default {
 					</p>
 				</div>
 
-
 				<!-- azioni -->
 				<div class="col-12 py-4 align-items-center d-flex gap-2 justify-content-center" v-if="cart.length > 0">
 					<router-link :to="{ name: 'checkout' }">
@@ -138,14 +137,18 @@ export default {
 	transition: right 0.3s ease;
 	z-index: 1050;
 	height: 100vh;
-	width: 35%;
-	min-width: 425px;
+	width: 100%;
+
+	@media(min-width: 426px) {
+		min-width: 425px;
+		width: 35%;
+	}
+
 
 	i {
 		color: black;
 		font-size: 1rem;
 	}
-
 
 	td {
 		vertical-align: middle;

@@ -6,8 +6,9 @@ const initialState = {
 	types: [],
 	dishes: [],
 	typesList: [],
-	/* base_api: "http://127.0.0.1:8000/", */
-	base_api: "https://deliveboo-back-office.carloadile.com/",
+	base_api: import.meta.env.MODE === 'development'
+		? "http://127.0.0.1:8000/"
+		: "https://deliveboo-back-office.carloadile.com/",
 	restaurants_api: "api/restaurants",
 	items: [],
 	order_resume: [],
@@ -15,17 +16,13 @@ const initialState = {
 	toggle: false
 };
 
-
 export const state = reactive(initialState);
-
-
 
 /* salva item in local storage */
 const saveToLocalStorage = () => {
 	localStorage.setItem("items", JSON.stringify(state.items));
 	localStorage.setItem("cartRestaurantName", state.cartRestaurantName);
 };
-
 
 /* carica local storage all'avvio */
 const loadFromLocalStorage = () => {
@@ -45,7 +42,6 @@ const loadFromLocalStorage = () => {
 const loadName = () => {
 	state.cartRestraurantName = localStorage.getItem("cartRestaurantName");
 }
-
 
 /* calcola il totale del carrello */
 state.calculateTotal = function () {
