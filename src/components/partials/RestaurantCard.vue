@@ -18,9 +18,6 @@ export default {
 		}
 	},
 	mounted() {
-		/* console.log('progetto:', this.project); */
-		//console.log(this.restaurant);
-		//console.log(this.baseApiUrl);
 		/* console.log("tutte le tipologie", this.restaurant.types); */
 	},
 	computed: {
