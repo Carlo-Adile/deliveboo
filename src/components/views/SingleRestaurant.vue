@@ -164,7 +164,7 @@ export default {
 							<h5>{{ dish.name }}</h5>
 							<p class="text-secondary lh-sm dish_clamp"> {{ dish.description }}</p>
 						</div>
-						<div class="col-6 col-md-4 col-xxl-3 align-self-center p-1">
+						<div class="col-6 col-md-4 col-xxl-3 p-1">
 							<img v-if="dish.image" :src="state.base_api + 'storage/' + dish.image" :alt="restaurant.name_restaurant"
 								class="card-img">
 							<img v-else src="https://placehold.co/100x100" :alt="restaurant.name_restaurant" class="card-img">

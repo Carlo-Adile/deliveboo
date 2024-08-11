@@ -22,20 +22,15 @@ export default {
 	mounted() {
 		console.log(state.order_resume);
 	}
-	/* se si vuole fare un redirect automatico dopo 5 secondi
-	created() {
-			setTimeout(() => this.$router.push({ name: 'home' }), 5000);
-	} */
 }
 </script>
 
 <template>
 	<div class="container py-5">
-		<div class="d-flex justify-content-center flex-column">
+		<div class="row justify-content-center flex-column">
 			<br>
-			<h1>Grazie per i tuoi acquisti</h1>
+			<h2 class="text-center">Grazie per il tuo ordine!</h2>
 			<br>
-
 
 			<div class="table-responsive">
 				<table class="table">

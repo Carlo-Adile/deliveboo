@@ -104,7 +104,7 @@ export default {
 				<div class="col-12 py-4 align-items-center d-flex gap-2 justify-content-center" v-if="cart.length > 0">
 					<router-link :to="{ name: 'checkout' }">
 						<button class="btn rounded-pill btn_secondary" @click="toggleModal()">
-							Procedi al pagamento
+							Conferma ordine
 						</button>
 					</router-link>
 					<button class="btn rounded-pill btn_tertiary" @click="clearCart">
